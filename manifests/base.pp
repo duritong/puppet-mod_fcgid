@@ -4,9 +4,9 @@ class mod_fcgid::base {
     }
 
     file{"/etc/httpd/conf.d/fcgid.conf":
-        source => [ "puppet://$server/modules/site-mod_fcgid/${fqdn}/ssl.conf",
-                    "puppet://$server/modules/site-mod_fcgid/fcgid.conf",
-                    "puppet://$server/modules/mod_fcgid/fcgid.conf"
+        source => [ "puppet:///modules/site-mod_fcgid/${fqdn}/ssl.conf",
+                    "puppet:///modules/site-mod_fcgid/fcgid.conf",
+                    "puppet:///modules/mod_fcgid/fcgid.conf"
         ],
         owner => root, group => 0, mode => 0644;
     }
