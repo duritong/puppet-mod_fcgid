@@ -8,6 +8,6 @@ class mod_fcgid::base {
     force => true,
     purge => true,
     recurse => true,
-    owner => root, group => 0, mode => 0700;
+    owner => root, group => 0, mode => 0644;
   }
 }

@@ -8,8 +8,12 @@ define mod_fcgid::starter(
 ){
   require ::mod_fcgid
 
-  file{"/var/www/mod_fcgid-starters/${name}":
-    content => template("mod_fcgid/${cgi_type}_starter.erb"),
-    owner => $owner, group => $group, mode => 0700;
+  file{
+    "/var/www/mod_fcgid-starters/${name}":
+      ensure => directory,
+      owner => $owner, group => $group, mode => 0700;
+    "/var/www/mod_fcgid-starters/${name}/${name}-starter":
+      content => template("mod_fcgid/${cgi_type}_starter.erb"),
+      owner => $owner, group => $group, mode => 0700;
   }
 }
