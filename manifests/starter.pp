@@ -5,7 +5,7 @@ define mod_fcgid::starter(
   $fcgi_max_requests = 5000,
   $fcgi_children = 8
 ){
-  require ::mod_fastcgid
+  require ::mod_fcgid
 
   file{"/var/www/mod_fcgid-starters/${name}":
     content => template("mod_fcgid/${cgi_type}_starter.erb"),
