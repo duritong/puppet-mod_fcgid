@@ -1,4 +1,4 @@
-define mod_fastcgid::starter(
+define mod_fcgid::starter(
   $owner,
   $group,
   $cgi_type,
