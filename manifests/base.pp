@@ -10,4 +10,11 @@ class mod_fcgid::base {
     recurse => true,
     owner => root, group => 0, mode => 0644;
   }
+
+  if $selinux == 'true' {
+    package{'mod_fcgid-selinux':
+      ensure => present,
+      require => Package['mod_fcgid'],
+    }
+  }
 }
