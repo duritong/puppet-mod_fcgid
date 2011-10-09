@@ -3,8 +3,7 @@ define mod_fcgid::starter(
   $group,
   $cgi_type,
   $cgi_type_options = {},
-  $fcgi_max_requests = 5000,
-  $fcgi_children = 8
+  $fcgi_max_requests = 5000
 ){
   require ::mod_fcgid
 
