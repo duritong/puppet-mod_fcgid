@@ -6,4 +6,4 @@ export PHP_FCGI_MAX_REQUESTS=<%= fcgi_max_requests %>
 export PHP_FCGI_CHILDREN=0
 # files that get written by the apache should be read and writeable by the group, which is also the group of the sftp user and apache.
 umask 0007
-exec /usr/bin/php-cgi <%= cgi_type_options.keys.sort.collect{|flag| "-d #{flag}='#{cgi_type_options[flag]}'" }.join(' ') %>
+exec /usr/bin/php-cgi <%= cgi_type_options.reject{|k,v| v == :undef }.keys.sort.collect{|flag| "-d #{flag}='#{cgi_type_options[flag]}'" }.join(' ') %>
