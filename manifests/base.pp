@@ -14,10 +14,12 @@ class mod_fcgid::base {
             mode => 0644 ;
     }
     if $::selinux == 'true' {
-        package {
-            'mod_fcgid-selinux' :
-                ensure => present,
-                require => Package['mod_fcgid'],
+        if $::lsbmajdistrelease == '5' {
+            package {
+                'mod_fcgid-selinux' :
+                    ensure => present,
+                    require => Package['mod_fcgid'],
+            }
         }
         selinux::fcontext {
             '/var/www/mod_fcgid-starters/.+(/.*)?' :
