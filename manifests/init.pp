@@ -3,7 +3,7 @@
 # GPLv3
 
 class mod_fcgid {
-    case $operatingsystem {
+    case $::operatingsystem {
         default: { include mod_fcgid::base }
     }
 }
