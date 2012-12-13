@@ -1,3 +1,4 @@
+# define a mod_fcgid starter
 define mod_fcgid::starter(
   $owner,
   $group,
@@ -9,13 +10,17 @@ define mod_fcgid::starter(
 
   file{
     "/var/www/mod_fcgid-starters/${name}":
-      ensure => directory,
-      force => true,
-      purge => true,
+      ensure  => directory,
+      force   => true,
+      purge   => true,
       recurse => true,
-      owner => $owner, group => $group, mode => 0644;
+      owner   => $owner,
+      group   => $group,
+      mode    => '0644';
     "/var/www/mod_fcgid-starters/${name}/${name}-starter":
       content => template("mod_fcgid/${cgi_type}_starter.erb"),
-      owner => $owner, group => $group, mode => 0700;
+      owner   => $owner,
+      group   => $group,
+      mode    => '0700';
   }
 }
