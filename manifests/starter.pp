@@ -4,7 +4,8 @@ define mod_fcgid::starter(
   $group,
   $cgi_type,
   $cgi_type_options = {},
-  $fcgi_max_requests = 5000
+  $fcgi_max_requests = 5000,
+  $php_tmp_dir = false
 ){
   require ::mod_fcgid
 
