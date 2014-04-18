@@ -1,16 +1,16 @@
 #!/bin/sh
 PHPRC=/etc/
 export PHPRC
-export PHP_FCGI_MAX_REQUESTS=<%= fcgi_max_requests %>
+export PHP_FCGI_MAX_REQUESTS=<%= @fcgi_max_requests %>
 # PHP child process management (PHP_FCGI_CHILDREN) should always be disabled with mod_fcgid -> https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html
 export PHP_FCGI_CHILDREN=0
-<% if php_tmp_dir -%>
-export TMPDIR='<%= php_tmp_dir %>'
+<% if @php_tmp_dir -%>
+export TMPDIR='<%= @php_tmp_dir %>'
 <% end -%>
 # files that get written by the apache should be read and writeable by the group, which is also the group of the sftp user and apache.
 umask 0007
-exec /usr/bin/php-cgi <%= cgi_type_options.reject{|k,v| v == :undef }.keys.sort.collect { |flag|
-  dvalue = cgi_type_options[flag].to_s.downcase
+exec /usr/bin/php-cgi <%= @cgi_type_options.reject{|k,v| (v == :undef) || v.nil? }.keys.sort.collect { |flag|
+  dvalue = @cgi_type_options[flag].to_s.downcase
   munged_value = if dvalue == 'true'
     'on'
   elsif dvalue == 'false'
@@ -18,7 +18,7 @@ exec /usr/bin/php-cgi <%= cgi_type_options.reject{|k,v| v == :undef }.keys.sort.
   elsif ['on','off'].include?(dvalue)
     dvalue
   else
-    cgi_type_options[flag]
+    @cgi_type_options[flag]
   end
 
   "-d #{flag}='#{munged_value}'"
