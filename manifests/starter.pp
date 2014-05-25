@@ -3,9 +3,10 @@ define mod_fcgid::starter(
   $owner,
   $group,
   $cgi_type,
-  $cgi_type_options = {},
-  $fcgi_max_requests = 5000,
-  $php_tmp_dir = false
+  $cgi_type_options   = {},
+  $fcgi_max_requests  = 5000,
+  $tmp_dir            = false,
+  $binary             = undef,
 ){
   require ::mod_fcgid
 
