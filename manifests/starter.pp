@@ -7,6 +7,7 @@ define mod_fcgid::starter(
   $fcgi_max_requests  = 5000,
   $tmp_dir            = false,
   $binary             = undef,
+  $additional_cmds    = undef,
 ){
   require ::mod_fcgid
 
