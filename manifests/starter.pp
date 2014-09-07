@@ -8,6 +8,7 @@ define mod_fcgid::starter(
   $tmp_dir            = false,
   $binary             = undef,
   $additional_cmds    = undef,
+  $rc                 = undef,
 ){
   require ::mod_fcgid
 
