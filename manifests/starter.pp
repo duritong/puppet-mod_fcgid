@@ -27,4 +27,9 @@ define mod_fcgid::starter(
       group   => $group,
       mode    => '0700';
   }
+  if str2bool($::selinux) {
+    File["/var/www/mod_fcgid-starters/${name}","/var/www/mod_fcgid-starters/${name}/${name}-starter"]{
+      seltype => httpd_sys_script_exec_t,
+    }
+  }
 }

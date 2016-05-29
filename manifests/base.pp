@@ -3,7 +3,8 @@
 class mod_fcgid::base {
   package {
     'mod_fcgid' :
-      ensure => installed,
+      ensure  => installed,
+      require => Package['apache'],
   }
   file {
     '/var/www/mod_fcgid-starters' :
