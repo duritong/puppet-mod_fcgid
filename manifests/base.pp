@@ -17,8 +17,8 @@ class mod_fcgid::base {
       group   => 0,
       mode    => '0644';
   }
-  if $::selinux == 'true' {
-    if $::lsbmajdistrelease == '5' {
+  if str2bool($::selinux) {
+    if $::operatingsystemmajrelease == '5' {
       package {
         'mod_fcgid-selinux' :
           ensure  => present,
