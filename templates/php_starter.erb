@@ -3,10 +3,11 @@ export PHPRC=<%= @rc || '/etc'  %>
 export PHP_FCGI_MAX_REQUESTS=<%= @fcgi_max_requests %>
 # PHP child process management (PHP_FCGI_CHILDREN) should always be disabled with mod_fcgid -> https://httpd.apache.org/mod_fcgid/mod/mod_fcgid.html
 export PHP_FCGI_CHILDREN=0
-<% if @tmp_dir -%>
 export TMPDIR='<%= @tmp_dir %>'
-<% end -%>
-<% if @additional_cmds -%>
+<% (@additional_envs||{}).keys.sort.each do |k|-%>
+export <%= k.upcase %>='<%= @additional_envs[k] %>'
+<% end
+if @additional_cmds -%>
 <%= @additional_cmds %>
 <% end -%>
 # files that get written by the apache should be read and writeable by the group, which is also the group of the sftp user and apache.
