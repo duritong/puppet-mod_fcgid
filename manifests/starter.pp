@@ -1,5 +1,5 @@
 # define a mod_fcgid starter
-define mod_fcgid::starter(
+define mod_fcgid::starter (
   $owner,
   $group,
   $cgi_type,
@@ -10,10 +10,10 @@ define mod_fcgid::starter(
   $binary             = undef,
   $additional_cmds    = undef,
   $rc                 = undef,
-){
-  require ::mod_fcgid
+) {
+  require mod_fcgid
 
-  file{
+  file {
     "/var/www/mod_fcgid-starters/${name}":
       ensure  => directory,
       force   => true,
@@ -28,8 +28,8 @@ define mod_fcgid::starter(
       group   => $group,
       mode    => '0700';
   }
-  if str2bool($::selinux) {
-    File["/var/www/mod_fcgid-starters/${name}","/var/www/mod_fcgid-starters/${name}/${name}-starter"]{
+  if $facts['os']['selinux']['enabled'] {
+    File["/var/www/mod_fcgid-starters/${name}","/var/www/mod_fcgid-starters/${name}/${name}-starter"] {
       seltype => httpd_sys_script_exec_t,
     }
   }
