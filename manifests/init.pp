@@ -4,13 +4,13 @@ class mod_fcgid {
   package {
     'mod_fcgid' :
       ensure  => installed,
+      require => Package['apache'],
   } -> file {
     '/var/www/mod_fcgid-starters' :
       ensure  => directory,
       force   => true,
       purge   => true,
       recurse => true,
-      require => Package['apache'],
       owner   => root,
       group   => 0,
       mode    => '0644';
